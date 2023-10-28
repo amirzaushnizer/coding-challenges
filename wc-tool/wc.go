@@ -80,12 +80,21 @@ func countChars(file *os.File) int {
 }
 
 func main() {
+
 	filePath := os.Args[len(os.Args)-1]
 
-	file, err := os.Open(filePath)
-	if err != nil {
-		log.Fatal(err)
+	var file *os.File
+	var err error
+	if filePath == "-c" || filePath == "-l" || filePath == "-w" || filePath == "-m" {
+		// define file as stdin
+		file = os.Stdin
+	} else {
+		file, err = os.Open(filePath)
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
+
 	defer file.Close()
 
 	cFlag := flag.Bool("c", false, "print the byte counts")
