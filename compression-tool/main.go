@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	"compression/hufftree"
 	"log"
 	"os"
 )
@@ -21,12 +21,6 @@ func getCharFrequencies(file *os.File) map[byte]int {
 	return frequencies
 }
 
-func printCharFrequencies(frequencies map[byte]int) {
-	for char, count := range frequencies {
-		fmt.Printf("%q: %d\n", char, count)
-	}
-}
-
 func main() {
 	if len(os.Args) < 2 {
 		log.Fatal("Please provide a file path")
@@ -43,5 +37,7 @@ func main() {
 
 	// printCharFrequencies(getCharFrequencies(file))
 	frequencies := getCharFrequencies(file)
+	huffHeap := hufftree.CreateHuffHeap(frequencies)
+	hufftree.PrintHeap(huffHeap)
 
 }
