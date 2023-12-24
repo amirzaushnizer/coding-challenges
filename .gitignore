@@ -1,5 +1,1 @@
 # .gitignore
-
-# Ignore all files without an extension
-**/*
-!**/*.*
