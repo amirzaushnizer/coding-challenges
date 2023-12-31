@@ -48,7 +48,7 @@ func CreateHuffHeap(frequencies map[byte]int) *HuffHeap {
 	return huffHeap
 }
 
-func PrintHeap(huffHeap *HuffHeap) {
+func (huffHeap *HuffHeap) PrintHeap() {
 	for huffHeap.Len() > 0 {
 		node := heap.Pop(huffHeap).(*HuffTreeNode)
 		fmt.Printf("%q: %d\n", node.Element, node.Weight)
@@ -63,7 +63,7 @@ func CreateInternalNode(weight int, left *HuffTreeNode, right *HuffTreeNode) *Hu
 	return &HuffTreeNode{weight, 0, left, right, false}
 }
 
-func CreateHuffTree(huffHeap *HuffHeap) *HuffTreeNode {
+func (huffHeap *HuffHeap) ToHuffTree() *HuffTreeNode {
 	var tmp1, tmp2, tmp3 *HuffTreeNode = nil, nil, nil
 
 	for huffHeap.Len() > 1 {
@@ -86,7 +86,7 @@ func encodeHuffTreeRec(root *HuffTreeNode, path string, encoding map[byte]string
 	encodeHuffTreeRec(root.Right, path+"1", encoding)
 }
 
-func EncodeHuffTree(root *HuffTreeNode) map[byte]string {
+func (root *HuffTreeNode) Encode() map[byte]string {
 	encodingTable := make(map[byte]string)
 	encodeHuffTreeRec(root, "", encodingTable)
 

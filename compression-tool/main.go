@@ -31,9 +31,9 @@ func main() {
 		frequencies := charfrequencies.GetCharFrequencies(file)
 
 		huffHeap := hufftree.CreateHuffHeap(frequencies)
-		huffTree := hufftree.CreateHuffTree(huffHeap)
+		huffTree := huffHeap.ToHuffTree()
 
-		encodingTable := hufftree.EncodeHuffTree(huffTree)
+		encodingTable := huffTree.Encode()
 		encdec.WriteEncodedFile(file, encodingTable, endcodedFilePath)
 	} else {
 		if len(os.Args) < 4 {
